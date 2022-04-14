@@ -1,0 +1,25 @@
+server:
+  port: 8702 # 端口自己决定# 指定当前eureka客户端的注册地址，也就是eureka服务的提供方，当前配置的服务的注册服务方
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8700/eureka
+    register-with-eureka: true #自身 不在向eureka注册
+    fetch-registry: true #启动时禁用client的注册
+  instance:
+    hostname: localhost #指定应用名称
+spring:
+  application:
+    name: udd
+
+#开启feign的压缩功能
+feign:
+  compression:
+    request:
+      enabled: true
+      #支持的媒体类型列表
+      mime-types: text/xml,application/xml,application/json
+      #请求的最小阈值
+      min-request-size: 2048
+    response:
+      enabled: true
