@@ -1,1 +1,5 @@
-已经集成redis mysql mybatis-plus gateway
+已经集成 技术
+redis 
+mysql 
+mybatis-plus 
+gateway
