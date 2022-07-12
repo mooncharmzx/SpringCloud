@@ -3,7 +3,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:8700/eureka
+      defaultZone: http://${eureka.instance.hostname}:8700/eureka,http://safe:8703/eureka
     register-with-eureka: true #自身 不在向eureka注册
     fetch-registry: true #启动时禁用client的注册
   instance:
@@ -15,13 +15,40 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: ribbon_test
-          uri: lb://localhost:8702
+        - id: udd
+          uri: http://localhost:8702
           predicates:
             - Path=/udd/**
-          #实现方式1
+          #实现方式1 http://localhost:8701/udd/test/getUser
           filters:
-            - RewritePath=/api-a/(?<segment>.*), /$\{segment}
+            - RewritePath=/udd/(?<segment>.*), /$\{segment}
+        - id: admin
+          uri: http://safe:8704
+          predicates:
+            - Path=/admin/**
+          #实现方式1 http://localhost:8701/admin/test/getUser
+          filters:
+            - RewritePath=/admin/(?<segment>.*), /$\{segment}
+        - id: cloudredis
+          uri: http://safe:8706
+          predicates:
+            - Path=/cloudredis/**
+          #实现方式1 http://localhost:8701/admin/test/getUser
+          filters:
+            - RewritePath=/cloudredis/(?<segment>.*), /$\{segment}
+
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        forceOpen: false # 是否强制打开熔断器，如果设置true，表示打开熔断器，然后拒绝所有请求，默认是false的
+        errorThresholdPercentage: 50   #失败比例阈值，默认值50%
+        sleepWindowInMilliseconds: 1000  #熔断后休眠时⻓，默认值5秒
+        requestVolumeThreshold: 3   #最小请求数，默认值是20
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000  #超时设置，默认为1秒
 
 #开启feign的压缩功能
 feign:

@@ -1,0 +1,38 @@
+server:
+  port: 8705 # 端口自己决定# 指定当前eureka客户端的注册地址，也就是eureka服务的提供方，当前配置的服务的注册服务方
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8700/eureka,http://safe:8703/eureka
+    register-with-eureka: true #自身 不在向eureka注册
+    fetch-registry: true #启动时禁用client的注册
+  instance:
+    hostname: localhost #指定应用名称
+
+spring:
+  application:
+    name: springcloud-hystrix
+
+turbine:
+  # 这里是配置 需要聚合的服务名字，然后多个的话 就用逗号隔开,   我们这里是配置的用户服务
+  app-config: udd,admin
+  # 这里是集群默认名字
+  cluster-name-expression: "'default'"
+
+ribbon:
+  OkToRetryOnAllOperations: false #对所有操作请求都进行重试,默认false
+  ReadTimeout: 60000   #负载均衡超时时间，默认值5000
+  ConnectTimeout: 3000 #ribbon请求连接的超时时间，默认值2000
+  MaxAutoRetries: 0     #对当前实例的重试次数，默认0
+  MaxAutoRetriesNextServer: 1 #对切换实例的重试次数，默认1
+
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000 #断路器超时时间，默认1000ms

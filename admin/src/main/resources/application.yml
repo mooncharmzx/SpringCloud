@@ -1,0 +1,75 @@
+server:
+  port: 8704 # 端口自己决定# 指定当前eureka客户端的注册地址，也就是eureka服务的提供方，当前配置的服务的注册服务方
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8700/eureka/,http://safe:8703/eureka/
+    register-with-eureka: true #自身 不在向eureka注册
+    fetch-registry: true #启动时禁用client的注册
+  instance:
+    hostname: localhost #指定应用名称
+spring:
+  application:
+    name: admin
+  datasource:
+    #数据库驱动
+    #      driverClassName: org.postgresql.Driver
+    driverClassName: com.mysql.jdbc.Driver
+    #数据库连接
+    #      url: jdbc:postgresql://localhost:5432/biyi_base
+    url: jdbc:mysql://localhost:3306/spring-cloud-demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&allowMultiQueries=true&noAccessToProcedureBodies=true
+    #数据库的名称,biyi-form组件使用
+    db-name: spring-cloud-demo
+
+    #数据库连接池
+#    type: com.zaxxer.hikari.HikariDataSource
+    #数据库用户名
+    username: root
+    #数据库密码
+    password: 123456
+    hikari:
+      #最大连接池数
+      maximumPoolSize: 20
+    #是否自定义配置
+    cachePrepStmts: true
+    #连接池大小
+    prepStmtCacheSize: 250
+    #单条语句最大长度
+    prepStmtCacheSqlLimit: 2048
+    #新版本MySQL支持服务器端准备，是否开启
+    useServerPrepStmts: true
+
+    #国际化
+    messages:
+      #配置路径
+      basename: i18n/messages
+      #字符集
+      encoding: UTF-8
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+#开启feign的压缩功能
+feign:
+  compression:
+    request:
+      enabled: true
+      #支持的媒体类型列表
+      mime-types: text/xml,application/xml,application/json
+      #请求的最小阈值
+      min-request-size: 2048
+    response:
+      enabled: true
+
+security:
+  basic:
+    enabled: false # 暂时取消security认证
+management:
+  security:
+    enabled: false # 暂时取消security认证

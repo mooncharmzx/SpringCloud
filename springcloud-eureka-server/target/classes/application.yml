@@ -8,6 +8,9 @@ eureka:
     fetch-registry: false #启动时禁用client的注册
   instance:
     hostname: localhost #指定应用名称
+  server:
+    enable-self-preservation: true
+    renewal-percent-threshold: 0.49 #默认0.85 这个是最近一分钟接收到的心跳次数
 spring:
   application:
-    name: eureka-server
+    name: springCloud-eureka-server
