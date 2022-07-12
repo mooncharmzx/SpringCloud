@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Comparator;
 import java.util.List;
@@ -28,6 +29,9 @@ public class TestController {
 
     @Autowired
     JedisConnectionFactory jedisConnectionFactory;
+
+    @Autowired
+    RestTemplate restTemplate;
 
     @RequestMapping("/redisPutString")
     public Result redisPutString(String params){
@@ -185,6 +189,13 @@ public class TestController {
             result.setCode(-1);
         }
 
+        return result;
+    }
+
+    @RequestMapping("visitAdmin")
+    public Result visitAdmin(String params){
+        Result result = new Result();
+//        restTemplate.postForEntity()
         return result;
     }
 
