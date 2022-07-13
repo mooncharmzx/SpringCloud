@@ -64,12 +64,13 @@ consul密码：！QAZ2wsx3
 http://localhost:8500
 
 手动注册服务 register-manual
-接口地址:http://localhost:8706/register/put
-请求类型:multipart/form-data
+1、consul接口地址:http://localhost:8706/register/consul
+   请求类型:multipart/form-data
 
-参数名:params
-参数值:{"ipAddress":"http://localhost:8706/","hostName":"test_app","instanceZone":"http://localhost:8700/eureka","serverName":"register-manual","port":8706,"address":"127.0.0.1"}
+   参数名:params
+   参数值:{"ipAddress":"http://localhost:8706/","hostName":"test_app","instanceZone":"http://localhost:8700/eureka","serverName":"register-manual","port":8706,"address":"127.0.0.1"}
 
+2、eureka接口地址
 
 *******************************************************
 计划还会集成spring cloud 的其他组件

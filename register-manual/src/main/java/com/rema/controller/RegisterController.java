@@ -23,7 +23,7 @@ public class RegisterController {
     @Autowired
     private ConsulServiceRegistry consulServiceRegistry;
 
-    @RequestMapping("put")
+    @RequestMapping("consul")
     public String put(@RequestParam String params){
 
         JSONObject jsonObject = JSON.parseObject(params);
