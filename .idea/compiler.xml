@@ -9,17 +9,17 @@
         <outputRelativeToContentRoot value="true" />
         <module name="springcloud-gateway" />
         <module name="springcloud-eureka-server" />
-        <module name="udd" />
         <module name="springcloud-eureka-safeserver" />
-        <module name="register-manual" />
         <module name="springcloud-redis" />
+        <module name="register-manual" />
+        <module name="udd" />
         <module name="springcloud-hystrix" />
         <module name="admin" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="admin" target="8" />
-      <module name="register-manual" target="1.7" />
+      <module name="register-manual" target="8" />
       <module name="springcloud-eureka-safeserver" target="1.7" />
       <module name="springcloud-eureka-server" target="1.8" />
       <module name="springcloud-gateway" target="1.8" />
