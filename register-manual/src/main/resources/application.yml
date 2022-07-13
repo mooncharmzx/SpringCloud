@@ -6,3 +6,5 @@ spring:
     consul:
       discovery:
         register: false
+  application:
+    name: register-manual

@@ -39,7 +39,9 @@ public class RegisterController {
         String instanceZone = jsonObject.getString("instanceZone") ;
         String serverName = jsonObject.getString("serverName");
 
+        //生产者的服务地址
         String address = jsonObject.getString("address");
+        //生产者的服务端口
         Integer port = jsonObject.getInteger("port");
 
         consulDiscoveryProperties.setIpAddress(ipAddress);
@@ -52,6 +54,7 @@ public class RegisterController {
         newService.setId(UUID.randomUUID().toString());
         newService.setAddress(address);
         newService.setPort(port);
+        newService.setName(serverName);
 //        newService.set
         ConsulRegistration consulRegistration = new ConsulRegistration(newService,consulDiscoveryProperties);
 

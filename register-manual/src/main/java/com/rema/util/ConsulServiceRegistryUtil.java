@@ -42,7 +42,7 @@ public class ConsulServiceRegistryUtil extends ConsulServiceRegistry {
         NewService service = reg.getService();
 
         // 设置服务名、实例ID
-        service.setName(this.serviceName);
+//        service.setName(this.serviceName);
         service.setId(Joiner.on(":").join(this.serviceName, service.getAddress(), String.valueOf(service.getPort())));
 
         super.register(reg);
