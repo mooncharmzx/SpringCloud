@@ -2,8 +2,8 @@ package com.rema.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.cn.sce.entity.Result;
 import com.ecwid.consul.v1.agent.model.NewService;
-import com.rema.util.ConsulServiceRegistryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.commons.util.InetUtils;
 import org.springframework.cloud.commons.util.InetUtilsProperties;
@@ -23,8 +23,9 @@ public class RegisterController {
     @Autowired
     private ConsulServiceRegistry consulServiceRegistry;
 
+
     @RequestMapping("consul")
-    public String put(@RequestParam String params){
+    public String consul(@RequestParam String params){
 
         JSONObject jsonObject = JSON.parseObject(params);
 
@@ -61,5 +62,20 @@ public class RegisterController {
         consulServiceRegistry.register(consulRegistration);
 
         return "";
+    }
+
+    @RequestMapping("eureka")
+    public String eureka(@RequestParam String params){
+
+        JSONObject jsonObject = JSON.parseObject(params);
+
+        return "";
+    }
+
+    @RequestMapping("login")
+    public Result login(){
+
+
+        return null;
     }
 }

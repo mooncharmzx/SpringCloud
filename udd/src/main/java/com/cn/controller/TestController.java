@@ -3,17 +3,15 @@ package com.cn.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.cn.admin.Result;
 import com.cn.config.redislock.RedisLock;
+import com.cn.sce.entity.Result;
+import com.cn.service.ScuserServiceImpl;
 import com.cn.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Comparator;
@@ -32,6 +30,9 @@ public class TestController {
 
     @Autowired
     RestTemplate restTemplate;
+
+    @Autowired
+    private ScuserServiceImpl scuserService;
 
     @RequestMapping("/redisPutString")
     public Result redisPutString(String params){
@@ -205,6 +206,11 @@ public class TestController {
             return JSON.parseObject(json);
         }
         return new JSONObject();
+    }
+
+    @RequestMapping("/testGetScuserByName")
+    public JSONObject testGetScuserByName(@RequestParam String username){
+        return scuserService.getScuserByName(username);
     }
 
 }

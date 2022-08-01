@@ -2,10 +2,14 @@ package com.cn.util;
 
 import com.cn.admin.LoginUser;
 import com.cn.exception.CustomException;
+import com.cn.sce.exception.RestControllerException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.Optional;
 
 /**
  * 安全服务工具类
@@ -84,5 +88,30 @@ public class SecurityUtils
     public static boolean isAdmin(Long userId)
     {
         return userId != null && 1L == userId;
+    }
+
+    public static Optional<Integer> getOptionalCurrentUserId() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        return Optional.ofNullable(securityContext.getAuthentication()).map((authentication) -> {
+            if (authentication.getPrincipal() instanceof LoginUser) {
+                LoginUser springSecurityUser = (LoginUser)authentication.getPrincipal();
+                return springSecurityUser.getId();
+            } else {
+                return null;
+            }
+        });
+    }
+
+    public static int getCurrentUserId() {
+        int userId = getOptionalCurrentUserId().map((id) -> {
+            return id;
+        }).orElse(0);
+
+        if(userId==0){
+
+            throw new RestControllerException("用户登录信息失效，请重新登录");
+        }else {
+            return userId;
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.cn.admin;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -12,7 +13,7 @@ import java.util.Set;
  *
  * @author ruoyi
  */
-public class LoginUser implements UserDetails
+public class LoginUser extends User implements UserDetails
 {
     private static final long serialVersionUID = 1L;
 
@@ -56,10 +57,58 @@ public class LoginUser implements UserDetails
      */
     private Set<String> permissions;
 
-    /**
-     * 用户信息
-     */
-    private T_User user;
+    private int id;
+
+    private String password;
+
+    private String userName;
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    private Integer desensitization;//1脱敏 0 不脱敏 默认为0
+
+    private Integer expire;// 1 大屏token不过期  0  30分钟过期
+
+    public Integer getDesensitization() {
+        return desensitization;
+    }
+
+    public void setDesensitization(Integer desensitization) {
+        this.desensitization = desensitization;
+    }
+
+    public Integer getExpire() {
+        return expire;
+    }
+
+    public void setExpire(Integer expire) {
+        this.expire = expire;
+    }
+
+    public Integer getMultipleLoginStatus() {
+        return multipleLoginStatus;
+    }
+
+    public void setMultipleLoginStatus(Integer multipleLoginStatus) {
+        this.multipleLoginStatus = multipleLoginStatus;
+    }
+
+    private Integer multipleLoginStatus;// 账号不可多地同时登录的限制，1：取消账号不可多地同时登录的限制
 
     public String getToken()
     {
@@ -71,26 +120,15 @@ public class LoginUser implements UserDetails
         this.token = token;
     }
 
-    public LoginUser()
-    {
+    public LoginUser(String username, String password, Collection<? extends GrantedAuthority> authorities){
+        super(username,password,authorities);
     }
 
-    public LoginUser(T_User user)
-    {
-        this.user = user;
-    }
+    public LoginUser(int id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
 
-    @JsonIgnore
-    @Override
-    public String getPassword()
-    {
-        return user.getPassword();
-    }
+        this(username,password,authorities);
+        this.id = id;
 
-    @Override
-    public String getUsername()
-    {
-        return user.getUserName();
     }
 
     /**
@@ -209,19 +247,11 @@ public class LoginUser implements UserDetails
         this.permissions = permissions;
     }
 
-    public T_User getUser()
-    {
-        return user;
+    public int getId() {
+        return id;
     }
 
-    public void setUser(T_User user)
-    {
-        this.user = user;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities()
-    {
-        return null;
+    public void setId(int id) {
+        this.id = id;
     }
 }
