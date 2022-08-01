@@ -55,4 +55,15 @@ public class ScuserServiceImpl {
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(params, headers);
         return restTemplate.postForEntity(url, request, JSONObject.class);
     }
+
+    public  JSONObject getScuserById(Integer userId){
+        String url = "http://GATEWAY/admin/wxoa/scuser/getUserByParams";
+
+        JSONObject paJson = new JSONObject();
+        paJson.put("id",userId);
+
+        ResponseEntity<?> response = strTurnJson(paJson,url);
+
+        return JSON.parseObject(response.getBody().toString());
+    }
 }

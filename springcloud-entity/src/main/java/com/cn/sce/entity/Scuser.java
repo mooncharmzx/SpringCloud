@@ -1,10 +1,12 @@
 package com.cn.sce.entity;
 
 import com.cn.sce.test.util.BaseEntity;
+import io.swagger.models.auth.In;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <p>
@@ -33,6 +35,14 @@ public class Scuser extends BaseEntity {
     private String password;
 
     private Integer loginState;
+
+    private String token;
+
+    private Integer desensitization;
+
+    private Integer expire;
+
+    private Date updateTime;
 
     public Scuser(){}
 

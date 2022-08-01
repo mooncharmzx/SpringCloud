@@ -1,5 +1,6 @@
 package com.cn.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.cn.admin.LoginUser;
 import com.cn.config.RedisCache;
@@ -173,28 +174,33 @@ public class LoginController {
         redisTemplate.setCacheObject(logInSuccessKey, token);
 
             //将账号是否脱敏存入本地缓存提高速度
-//            if (this.loginCache != null) {
-//
-//                int currentUserId = SecurityUtils.getCurrentUserId();
-//
-//                User currentUser = userRepository.findByCscpUserId(currentUserId);
-//                currentUser.setUpdateTime(new Date());//更新登陆时间
-//                if(currentUser.getExpire()==0){
-//                    currentUser.setToken(UUIDUtil.getUUID());
-//                }
-//                userRepository.save(currentUser);
-//                if(currentUser.getDesensitization()!=null&&currentUser.getDesensitization()==1){
-//                    this.loginCache.put("sce"+currentUserId,currentUser.getDesensitization());
-//                }else {
-//                    this.loginCache.delete("sce"+currentUserId);
-//                }
-//
-//            }
+            if (this.loginCache != null) {
+
+                int currentUserId = SecurityUtils.getCurrentUserId();
+
+                JSONObject currentUser = scuserService.getScuserById(currentUserId);
+                JSONArray data = currentUser.getJSONArray("data");
+
+                if(data.size() > 0){
+
+                    Scuser scuser =(Scuser) data.get(0);
+                    scuser.setUpdateTime(new Date());//更新登陆时间
+                    if(scuser.getExpire()==0){
+                        scuser.setToken(token);
+                    }
+                    scuserService.updateScuserById(scuser.getId().toString(),scuser);
+                    if(scuser.getDesensitization()!=null&&scuser.getDesensitization()==1){
+                        this.loginCache.put("sce"+currentUserId,scuser.getDesensitization());
+                    }else {
+                        this.loginCache.delete("sce"+currentUserId);
+                    }
+                }else{
+
+                }
+
+            }
 
             return new ResponseEntity(new JwtToken(token, 0), httpHeaders, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity(new UserJwtController.JwtToken("", status), httpHeaders, HttpStatus.OK);
-//        }
     }
 
     private String decryptPassword(String ciphertext) {
