@@ -2,6 +2,7 @@ package com.cn.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cn.admin.LoginUser;
+import com.cn.config.RedisCache;
 import com.cn.sce.IpUtil;
 import com.cn.sce.LoginCache;
 import com.cn.sce.RSAUtil;
@@ -21,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -73,6 +75,9 @@ public class LoginController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RedisCache redisTemplate;
 
     @RequestMapping("/login")
     public ResponseEntity<JwtToken> login(HttpServletRequest request,@RequestBody String lu) {
@@ -165,7 +170,7 @@ public class LoginController {
 
             //登录成功redis里面存token
 
-//            redisTempalte.set(logInSuccessKey, token);
+        redisTemplate.setCacheObject(logInSuccessKey, token);
 
             //将账号是否脱敏存入本地缓存提高速度
 //            if (this.loginCache != null) {

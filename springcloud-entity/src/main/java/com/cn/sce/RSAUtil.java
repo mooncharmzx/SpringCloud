@@ -45,7 +45,7 @@ public class RSAUtil {
 
     public static void main(String[] args) throws Exception {
 
-        String abc="1234561";
+        String abc="123456";
 
         String encrypt = encrypt(abc, publicKey);
 
