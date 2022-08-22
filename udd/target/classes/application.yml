@@ -3,11 +3,11 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:8700/eureka,http://windows10.microdone.cn:8703/eureka
+      defaultZone: http://localhost:8703/eureka
     register-with-eureka: true #自身 不在向eureka注册
     fetch-registry: true #启动时禁用client的注册
   instance:
-    hostname: localhost #指定应用名称
+    hostname: 192.168.192.128 #指定应用名称
 spring:
   application:
     name: udd
@@ -94,8 +94,6 @@ sce:
     login-log:
       enable: true
   security:
-    basic:
-      enable: false
     authentication:
       jwt:
         #token key密钥

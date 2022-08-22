@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/SpringCloudTest1.iml" filepath="$PROJECT_DIR$/.idea/SpringCloudTest1.iml" />
       <module fileurl="file://$PROJECT_DIR$/admin/admin.iml" filepath="$PROJECT_DIR$/admin/admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/register-manual/register-manual.iml" filepath="$PROJECT_DIR$/register-manual/register-manual.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springcloud-bigdata/springcloud-bigdata.iml" filepath="$PROJECT_DIR$/springcloud-bigdata/springcloud-bigdata.iml" />
       <module fileurl="file://$PROJECT_DIR$/springcloud-entity/springcloud-entity.iml" filepath="$PROJECT_DIR$/springcloud-entity/springcloud-entity.iml" />
       <module fileurl="file://$PROJECT_DIR$/springcloud-eureka-safeserver/springcloud-eureka-safeserver.iml" filepath="$PROJECT_DIR$/springcloud-eureka-safeserver/springcloud-eureka-safeserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/springcloud-eureka-server/springcloud-eureka-server.iml" filepath="$PROJECT_DIR$/springcloud-eureka-server/springcloud-eureka-server.iml" />

@@ -1,0 +1,85 @@
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+<property>
+   <name>system:java.io.tmpdir</name>
+     <value>/home/server/hive/tmp/hive</value>
+     </property>
+<property>
+     <name>system:user.name</name>
+     <value>hive</value>
+   </property>
+<property>
+<name>javax.jdo.option.ConnectionURL</name>
+<value>jdbc:mysql://192.168.178.129:3306/hive?createDatabaseIfNotExist=true&amp;characterEncoding=latin1&amp;useSSL=false&amp;serverTimezone=UTC</value>
+</property>
+ 
+<property>
+<name>javax.jdo.option.ConnectionDriverName</name>
+<value>com.mysql.jdbc.Driver</value>
+</property>
+ 
+<property>
+<name>javax.jdo.option.ConnectionUserName</name>
+<value>root</value>
+</property>
+<property>
+        <name>datanucleus.readOnlyDatastore</name>
+        <value>false</value>
+    </property>
+    <property> 
+        <name>datanucleus.fixedDatastore</name>
+        <value>false</value> 
+    </property>
+<property> 
+<name>datanucleus.autoCreateSchema</name> 
+<value>true</value> 
+</property>
+
+<property>
+<name>datanucleus.schema.autoCreateTables</name>
+<value>true</value>
+</property>
+
+<property>
+<name>datanucleus.autoCreateColumns</name>
+<value>true</value>
+</property>
+ 
+<property>
+<name>javax.jdo.option.ConnectionPassword</name>
+<value>123456</value>
+</property>
+ <property>
+    <name>hive.exec.scratchdir</name>
+    <value>/home/server/hive/tmp</value>
+</property>
+<property>
+    <name>hive.metastore.warehouse.dir</name>
+    <value>/home/server/hadoop/hadoop-3.2.3/datas/hudi-warehouse</value>
+</property>
+<property>
+    <name>hive.querylog.location</name>
+    <value>/home/server/hive/querylog</value>
+</property>
+
+<property>
+<name>hive.cli.print.current.db</name>
+<value>true</value>
+</property>
+<property>
+<name>hive.cli.print.header</name>
+<value>true</value>
+</property>
+ <property>
+ <name>hive.metastore.schema.verification</name>
+ <value>false</value>
+ </property>
+<property>
+    <name>hive.server2.thrift.port</name>
+    <value>10000</value>
+</property>
+<property>
+<name>hive.server2.thrift.bind.host</name>
+<value>192.168.178.129</value>
+</property>
+</configuration>

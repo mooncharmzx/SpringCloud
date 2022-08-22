@@ -1,0 +1,6 @@
+server:
+  port: 8710 # 端口自己决定# 指定当前eureka客户端的注册地址，也就是eureka服务的提供方，当前配置的服务的注册服务方
+
+spring:
+  application:
+    name: bigdata
