@@ -1,6 +1,7 @@
 package com.bigdata.scala
 
 import org.apache.hudi.QuickstartUtils.DataGenerator
+import org.apache.spark.SparkConf
 import org.apache.spark.sql.{DataFrame, SaveMode, SparkSession}
 
 /**
@@ -52,19 +53,24 @@ object HudiSparkDemo {
   /**
    *  采用Snapshot Query快照方式查询表的数据
    */
-  def queryData(spark: SparkSession, path: String): Unit = {
-    import spark.implicits._
+  def queryData(tableName:String): Unit = {
+    System.setProperty("HADOOP_USER_NAME", "root")
+    // 创建sparkSQL的运行环境
+    val conf = new SparkConf().setAppName("readHudi").setMaster("local[2]")
+      .set("spark.ui.enabled", "false")
+    val spark = SparkSession.builder().config(conf)
+      // 设置序列化方式：Kryo
+      .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+      .getOrCreate()
 
-    val tripsDF: DataFrame = spark.read.format("hudi").load(path)
-    //    tripsDF.printSchema()
-    //    tripsDF.show(10, truncate = false)
+    //定义变量：表名，数据存储路径
+    val tablePath : String = "/datas/hudi-warehouse/"+tableName
 
-    //查询费用大于10，小于50的乘车数据
-    tripsDF
-      .filter($"fare" >= 20 && $"fare" <=50)
-      .select($"driver", $"rider", $"fare", $"begin_lat", $"begin_lon", $"partitionpath", $"_hoodie_commit_time")
-      .orderBy($"fare".desc, $"_hoodie_commit_time".desc)
-      .show(20, truncate = false)
+    val tripsSnapshotDF = spark.read.format("hudi").load(tablePath + "/*/*/*/*")
+    tripsSnapshotDF.createOrReplaceTempView(tableName + "_view")
+    tripsSnapshotDF.printSchema()
+    //    spark.sql("select uuid,_hoodie_commit_time,_hoodie_commit_seqno,driver,ts from tb1_trips_cow_view where fare>20.0").show(false)
+    spark.stop()
   }
 
   def queryDataByTime(spark: SparkSession, path: String):Unit = {
@@ -230,6 +236,8 @@ object HudiSparkDemo {
     val deletes = dataGenerator.generateDeletes(dataframe.collectAsList())
 
     import scala.collection.JavaConverters._
+
+
     val deleteDF = spark.read.json(spark.sparkContext.parallelize(deletes.asScala, 2))
 
     // 第3步、保存数据到Hudi表中，设置操作类型：DELETE
@@ -257,28 +265,27 @@ object HudiSparkDemo {
   def main(args: Array[String]): Unit = {
 //    System.setProperty("HADOOP_USER_NAME","root")
 
+//    val conf = new SparkConf().setAppName("readHudi").setMaster("local[2]")
+//      .set("spark.ui.enabled", "false")
+
     //创建SparkSession示例对象，设置属性
-    val spark: SparkSession = {
-      SparkSession.builder()
-        .appName("insertDatasToHudi")
-        .master("local[2]")
-        // 设置序列化方式：Kryo
-        .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
-        .getOrCreate()
-    }
+//    val spark = SparkSession.builder().config(conf)
+      // 设置序列化方式：Kryo
+//      .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+//      .getOrCreate()
 
     //定义变量：表名称、保存路径
     val tableName: String = "tbl_trips_cow"
-    val tablePath: String = "/home/server/hadoop/hadoop-3.2.3/datas/hudi-warehouse/tbl_trips_cow"
+    val tablePath: String = "/datas/hudi-warehouse/"+tableName
 
     //构建数据生成器，模拟产生业务数据
     import org.apache.hudi.QuickstartUtils._
 
     //任务一：模拟数据，插入Hudi表，采用COW模式
-    insertData(spark, tableName, tablePath)
+//    insertData(spark, tableName, tablePath)
 
     //任务二：快照方式查询（Snapshot Query）数据，采用DSL方式
-    queryData(spark, tablePath)
+    queryData(tableName)
     //queryDataByTime(spark, tablePath)
 
     // 任务三：更新（Update）数据，第1步、模拟产生数据，第2步、模拟产生数据，针对第1步数据字段值更新，
@@ -294,7 +301,7 @@ object HudiSparkDemo {
 //    deleteData(spark, tableName,tablePath)
 
     //应用结束，关闭资源
-    spark.stop()
+//    spark.stop()
   }
 }
 

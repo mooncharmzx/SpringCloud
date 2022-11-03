@@ -18,7 +18,7 @@ object Demo {
       // 设置提交任务的yarn队列
       .set("spark.yarn.queue","spark")
       // 设置driver的ip地址
-      .set("spark.driver.host","192.168.178.129")
+      .set("spark.driver.host","192.168.0.104")
       .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
     // 创建 Spark 上下文环境对象（连接对象）
     val sc  = new SparkContext(sparkConf)

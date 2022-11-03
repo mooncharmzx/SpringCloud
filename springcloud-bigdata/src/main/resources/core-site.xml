@@ -20,15 +20,15 @@
 
 	<property>
 		<name>fs.defaultFS</name>
-		<value>hdfs://192.168.178.129:9000</value>
+		<value>hdfs://192.168.0.104:9000</value>
 	</property>
 	<property>
 		<name>hadoop.tmp.dir</name>
-		<value>/export/server/hadoop/datas/tmp</value>
+		<value>/datas/tmp</value>
 	</property>
 	<property>
-		<name>hadoop.http.staticuser.user</name>
-		<value>root</value>
+		<name>hadoop.http.root.user</name>
+		<value>*</value>
 	</property>
 
 </configuration>

@@ -1,5 +1,5 @@
 server:
-  port: 8702 # 端口自己决定# 指定当前eureka客户端的注册地址，也就是eureka服务的提供方，当前配置的服务的注册服务方
+  port: 8281 # 端口自己决定# 指定当前eureka客户端的注册地址，也就是eureka服务的提供方，当前配置的服务的注册服务方
 eureka:
   client:
     service-url:
@@ -10,7 +10,7 @@ eureka:
     hostname: localhost #指定应用名称
 spring:
   application:
-    name: udd
+    name: bigdata
   redis:
     port: 6379
     host: 127.0.0.1
@@ -24,7 +24,7 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
     #数据库连接
     #      url: jdbc:postgresql://localhost:5432/biyi_base
-    url: jdbc:mysql://localhost:3306/spring-cloud-demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&allowMultiQueries=true&noAccessToProcedureBodies=true
+    url: jdbc:mysql://192.168.0.104:3306/spring-cloud-demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&allowMultiQueries=true&noAccessToProcedureBodies=true
     #数据库的名称,biyi-form组件使用
     db-name: spring-cloud-demo
 
