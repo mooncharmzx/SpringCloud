@@ -1,8 +1,5 @@
 已经集成 技术
-redis 
-mysql 
-mybatis-plus 
-gateway
+redis、 mysql、mybatis-plus、gateway、jnetpcap、
 ***************************************************
 C:\Windows\System32\drivers\etc 修改如下内容
 192.168.192.1 safe
@@ -74,3 +71,9 @@ http://localhost:8500
 
 *******************************************************
 计划还会集成spring cloud 的其他组件
+
+*******************************************************
+udd 增加 jnetpcap 根据公众号链接拉取文章工具类;
+udd 增加 根据文件流或base64上传文件工具类;
+udd 增加 微信公众号接口测试工具类型;
+udd 增加 openfegin访问实例
