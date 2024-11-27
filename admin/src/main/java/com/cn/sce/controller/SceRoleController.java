@@ -4,7 +4,7 @@ package com.cn.sce.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
-import com.cn.sce.test.util.BaseController;
+import com.cn.sce.util.BaseController;
 
 /**
  * <p>

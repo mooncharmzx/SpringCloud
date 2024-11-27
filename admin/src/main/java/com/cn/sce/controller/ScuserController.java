@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cn.sce.admin.Result;
 import com.cn.sce.entity.Scuser;
 import com.cn.sce.service.ScuserService;
-import com.cn.sce.test.util.BaseController;
+import com.cn.sce.util.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

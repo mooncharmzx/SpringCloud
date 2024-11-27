@@ -29,12 +29,14 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure</artifactId>
+        <version>2.1.9.RELEASE</version>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
+        <version>2.4.1</version>
+        <scope>test</scope>
       <exclusions>
         <exclusion>
           <groupId>org.apache.logging.log4j</groupId>
@@ -46,12 +48,14 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+        <version>2.6.6</version>
     </dependency>
 
     <!-- 添加actuator依赖，可以提供监控 -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
+        <version>2.4.1</version>
     </dependency>
     <!-- 添加eureka依赖：服务发现组件 -->
     <dependency>
@@ -83,12 +87,12 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.16.22</version>
+      <version>1.18.16</version>
     </dependency>
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
-      <version>1.2.9</version>
+      <version>1.2.70</version>
     </dependency>
   </dependencies>
   <dependencyManagement>

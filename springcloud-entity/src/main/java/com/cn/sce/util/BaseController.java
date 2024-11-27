@@ -1,4 +1,4 @@
-package com.cn.sce.test.util;
+package com.cn.sce.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

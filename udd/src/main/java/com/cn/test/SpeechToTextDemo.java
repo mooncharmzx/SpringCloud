@@ -48,16 +48,16 @@ public class SpeechToTextDemo {
                     .build();
 
             // 创建识别请求
-            RecognizeResponse response = speechClient.recognize(
-                    RecognitionConfig.newBuilder().setConfig(config).build(),
-                    RecognitionAudio.newBuilder().setAudio(audioBytes).build()
-            );
+//            RecognizeResponse response = speechClient.recognize(
+//                    RecognitionConfig.newBuilder().setConfig(config).build(),
+//                    RecognitionAudio.newBuilder().setAudio(audioBytes).build()
+//            );
 
             // 输出识别结果
-            for (SpeechRecognitionResult result : response.getResultsList()) {
-                SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
-                System.out.printf("Transcription: %s%n", alternative.getTranscript());
-            }
+//            for (SpeechRecognitionResult result : response.getResultsList()) {
+//                SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
+//                System.out.printf("Transcription: %s%n", alternative.getTranscript());
+//            }
         }
     }
 

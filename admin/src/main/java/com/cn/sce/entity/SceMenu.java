@@ -1,7 +1,7 @@
 package com.cn.sce.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.cn.sce.test.util.BaseEntity;
+import com.cn.sce.util.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

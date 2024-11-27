@@ -1,6 +1,6 @@
 package com.cn.sce.entity;
 
-import com.cn.sce.test.util.BaseEntity;
+import com.cn.sce.util.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
